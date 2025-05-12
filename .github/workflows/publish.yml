@@ -43,6 +43,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           push: true
+          outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=Docker image with all dependencies to build Google's libwebrtc from source.
 
       - name: Generate attestation
         uses: actions/attest-build-provenance@v2
