@@ -12,7 +12,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: casl0/libwebrtc-builder/android
+  IMAGE_NAME: casl0/libwebrtc-builder/ubuntu
 
 jobs:
   build:
