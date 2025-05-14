@@ -1,3 +1,4 @@
+[![Publish Docker Image](https://github.com/CASL0/libwebrtc-builder-images/actions/workflows/publish.yml/badge.svg)](https://github.com/CASL0/libwebrtc-builder-images/actions/workflows/publish.yml)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/license/mit)
 
