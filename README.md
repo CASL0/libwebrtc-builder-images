@@ -14,7 +14,7 @@ Suitable for CI pipelines or local development.
 1. Use the following commands to run a Docker image for libwebrtc for Android.
 
    ```sh
-   docker container run --rm -it ghcr.io/casl0/libwebrtc-builder/android
+   docker container run --rm -it ghcr.io/casl0/libwebrtc-builder/ubuntu
    ```
 
 1. Build libwebrtc for Android inside the container.
@@ -22,6 +22,32 @@ Suitable for CI pipelines or local development.
    ```sh
    fetch --nohooks webrtc_android
    gclient sync
-   cd src && ./build/install-build-deps.sh
+   cd src
+   ./build/install-build-deps.sh
    tools_webrtc/android/build_aar.py
    ```
+
+### Building libwebrtc for Linux
+
+1. Use the following commands to run a Docker image for libwebrtc for Linux.
+
+   ```sh
+   docker container run --rm -it ghcr.io/casl0/libwebrtc-builder/ubuntu
+   ```
+
+1. Build libwebrtc for Linux inside the container.
+
+   ```sh
+   fetch --nohooks webrtc
+   gclient sync
+   cd src
+   ./build/install-build-deps.sh
+   gn gen out/Default
+   autoninja -C out/Default
+   ```
+
+## Available Images
+
+| Image                                    | Purpose                                 |
+| ---------------------------------------- | --------------------------------------- |
+| `ghcr.io/casl0/libwebrtc-builder/ubuntu` | Building libwebrtc for Android or Linux |
