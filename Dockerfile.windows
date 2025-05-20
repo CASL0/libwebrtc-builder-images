@@ -1,0 +1,13 @@
+# escape=`
+
+FROM mcr.microsoft.com/dotnet/framework/sdk:4.8.1-20250513-windowsservercore-ltsc2022
+
+ARG GIT_VERSION=2.49.0
+RUN curl -fSLo "%TEMP%\PortableGit.7z.exe" https://github.com/git-for-windows/git/releases/download/v%GIT_VERSION%.windows.1/PortableGit-%GIT_VERSION%-64-bit.7z.exe `
+    && start /wait %TEMP%\PortableGit.7z.exe -y -o C:\Git `
+    && powershell -Command "setx /M PATH $($Env:PATH + \";C:\Git\bin\")" `
+    && del "%TEMP%\PortableGit.7z.exe"
+
+RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools C:\depot_tools `
+    && git -C C:\depot_tools switch -c 977c37458fda472d8822a8b57e4a83a7bc747471 977c37458fda472d8822a8b57e4a83a7bc747471 `
+    && powershell -Command "setx /M PATH $(\"C:\depot_tools;\" + $Env:PATH)"
