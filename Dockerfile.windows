@@ -2,6 +2,10 @@
 
 FROM mcr.microsoft.com/dotnet/framework/sdk:4.8.1-20250513-windowsservercore-ltsc2022
 
+LABEL org.opencontainers.image.source="https://github.com/CASL0/libwebrtc-builder-images"
+LABEL org.opencontainers.image.description="Docker image with all dependencies to build Google's libwebrtc from source."
+LABEL org.opencontainers.image.licenses="MIT"
+
 ARG GIT_VERSION=2.49.0
 RUN curl -fSLo "%TEMP%\PortableGit.7z.exe" https://github.com/git-for-windows/git/releases/download/v%GIT_VERSION%.windows.1/PortableGit-%GIT_VERSION%-64-bit.7z.exe `
     && start /wait %TEMP%\PortableGit.7z.exe -y -o C:\Git `
