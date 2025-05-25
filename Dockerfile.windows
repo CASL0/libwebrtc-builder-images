@@ -12,6 +12,12 @@ RUN curl -fSLo "%TEMP%\PortableGit.7z.exe" "https://github.com/git-for-windows/g
     && powershell -Command "setx /M PATH $($Env:PATH + \";C:\Git\bin\")" `
     && del "%TEMP%\PortableGit.7z.exe"
 
+# gclient recommends setting
+RUN git config --global core.autocrlf false `
+    && git config --global core.filemode false `
+    && git config --global core.fscache true `
+    && git config --global core.preloadindex true
+
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools C:\depot_tools `
     && git -C C:\depot_tools switch -c 977c37458fda472d8822a8b57e4a83a7bc747471 977c37458fda472d8822a8b57e4a83a7bc747471 `
     && powershell -Command "setx /M PATH $(\"C:\depot_tools;\" + $Env:PATH)"
