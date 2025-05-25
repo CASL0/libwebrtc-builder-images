@@ -39,6 +39,13 @@ ENV DEPOT_TOOLS_WIN_TOOLCHAIN=0 `
     GYP_MSVS_VERSION=2022 `
     GYP_MSVS_OVERRIDE_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
 
+RUN curl -fSLo "%TEMP%\winsdksetup.exe" https://go.microsoft.com/fwlink/?linkid=2320455 `
+    && start /wait %TEMP%\winsdksetup.exe `
+        /features OptionId.WindowsDesktopDebuggers `
+        /quiet `
+        /norestart `
+    && del "%TEMP%\winsdksetup.exe"
+
 WORKDIR C:\workspace
 
 ENTRYPOINT [ "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass" ]
