@@ -7,10 +7,10 @@ LABEL org.opencontainers.image.description="Docker image with all dependencies t
 LABEL org.opencontainers.image.licenses="MIT"
 
 ARG GIT_VERSION=2.49.0
-RUN curl -fSLo "%TEMP%\PortableGit.7z.exe" "https://github.com/git-for-windows/git/releases/download/v%GIT_VERSION%.windows.1/PortableGit-%GIT_VERSION%-64-bit.7z.exe" `
-    && start /wait %TEMP%\PortableGit.7z.exe -y -o C:\Git `
-    && setx /M PATH "%PATH%;C:\Git\bin" `
-    && del "%TEMP%\PortableGit.7z.exe"
+RUN curl -fSLo "%TEMP%\\PortableGit.7z.exe" "https://github.com/git-for-windows/git/releases/download/v%GIT_VERSION%.windows.1/PortableGit-%GIT_VERSION%-64-bit.7z.exe" `
+    && start /wait %TEMP%\\PortableGit.7z.exe -y -o C:\\Git `
+    && setx /M PATH "%PATH%;C:\\Git\\bin" `
+    && del "%TEMP%\\PortableGit.7z.exe"
 
 # gclient recommends setting
 RUN git config --global core.autocrlf false `
@@ -18,13 +18,13 @@ RUN git config --global core.autocrlf false `
     && git config --global core.fscache true `
     && git config --global core.preloadindex true
 
-RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools C:\depot_tools `
-    && git -C C:\depot_tools switch -c 977c37458fda472d8822a8b57e4a83a7bc747471 977c37458fda472d8822a8b57e4a83a7bc747471 `
-    && setx /M PATH "C:\depot_tools;%PATH%"
+RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools C:\\depot_tools `
+    && git -C C:\\depot_tools switch -c 977c37458fda472d8822a8b57e4a83a7bc747471 977c37458fda472d8822a8b57e4a83a7bc747471 `
+    && setx /M PATH "C:\\depot_tools;%PATH%"
 
-RUN curl -fSLo "%TEMP%\vs_BuildTools.exe" https://aka.ms/vs/17/release/vs_BuildTools.exe `
-    && start /wait %TEMP%\vs_BuildTools.exe ^ `
-        --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools" ^ `
+RUN curl -fSLo "%TEMP%\\vs_BuildTools.exe" https://aka.ms/vs/17/release/vs_BuildTools.exe `
+    && start /wait %TEMP%\\vs_BuildTools.exe ^ `
+        --installPath "%ProgramFiles(x86)%\\Microsoft Visual Studio\\2022\\BuildTools" ^ `
         --add Microsoft.VisualStudio.Workload.VCTools ^ `
         --add Microsoft.VisualStudio.Component.VC.ATLMFC ^ `
         --add Microsoft.VisualStudio.Component.VC.Tools.ARM64 ^ `
@@ -32,20 +32,20 @@ RUN curl -fSLo "%TEMP%\vs_BuildTools.exe" https://aka.ms/vs/17/release/vs_BuildT
         --add Microsoft.VisualStudio.Component.Windows11SDK.26100 ^ `
         --includeRecommended ^ `
         --quiet --norestart --nocache --wait `
-    && del "%TEMP%\vs_BuildTools.exe"
+    && del "%TEMP%\\vs_BuildTools.exe"
 
 ENV DEPOT_TOOLS_WIN_TOOLCHAIN=0 `
-    VS2022_INSTALL="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools" `
+    VS2022_INSTALL="C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools" `
     GYP_MSVS_VERSION=2022 `
-    GYP_MSVS_OVERRIDE_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools"
+    GYP_MSVS_OVERRIDE_PATH="C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools"
 
-RUN curl -fSLo "%TEMP%\winsdksetup.exe" https://go.microsoft.com/fwlink/?linkid=2320455 `
-    && start /wait %TEMP%\winsdksetup.exe `
+RUN curl -fSLo "%TEMP%\\winsdksetup.exe" https://go.microsoft.com/fwlink/?linkid=2320455 `
+    && start /wait %TEMP%\\winsdksetup.exe `
         /features OptionId.WindowsDesktopDebuggers `
         /quiet `
         /norestart `
-    && del "%TEMP%\winsdksetup.exe"
+    && del "%TEMP%\\winsdksetup.exe"
 
-WORKDIR C:\workspace
+WORKDIR C:\\workspace
 
 ENTRYPOINT [ "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass" ]
