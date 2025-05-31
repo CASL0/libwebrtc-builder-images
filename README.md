@@ -46,8 +46,29 @@ Suitable for CI pipelines or local development.
    autoninja -C out/Default
    ```
 
+### Building libwebrtc for Windows
+
+1. Use the following commands to run a Docker image for libwebrtc for Windows.
+
+   ```sh
+   docker container run --rm -it ghcr.io/casl0/libwebrtc-builder/windows
+   ```
+
+1. Build libwebrtc for Windows inside the container.
+
+   ```sh
+   # WORKAROUND: Because the owner of C:\depot_tools is NT AUTHORITY\SYSTEM
+   icacls "C:\depot_tools" /setowner ContainerAdministrator /T
+   fetch --nohooks webrtc
+   gclient sync
+   cd src
+   gn gen out/Default
+   autoninja -C out/Default
+   ```
+
 ## Available Images
 
-| Image                                    | Purpose                                 |
-| ---------------------------------------- | --------------------------------------- |
-| `ghcr.io/casl0/libwebrtc-builder/ubuntu` | Building libwebrtc for Android or Linux |
+| Image                                     | Purpose                                 |
+| ----------------------------------------- | --------------------------------------- |
+| `ghcr.io/casl0/libwebrtc-builder/ubuntu`  | Building libwebrtc for Android or Linux |
+| `ghcr.io/casl0/libwebrtc-builder/windows` | Building libwebrtc for Windows          |
