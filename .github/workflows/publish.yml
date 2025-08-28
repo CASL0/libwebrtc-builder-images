@@ -68,7 +68,7 @@ jobs:
           outputs: type=image,name=target,annotation-index.org.opencontainers.image.description=Docker image with all dependencies to build Google's libwebrtc from source.
 
       - name: Generate attestation
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v3
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build-and-push.outputs.digest }}
