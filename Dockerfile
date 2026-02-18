@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:jammy-20260109
+FROM ubuntu:jammy-20260210.1
 
 LABEL org.opencontainers.image.source="https://github.com/CASL0/libwebrtc-builder-images"
 LABEL org.opencontainers.image.description="Docker image with all dependencies to build Google's libwebrtc from source."
